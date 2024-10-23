@@ -1,0 +1,90 @@
+<div class="container mx-auto px-4 py-8">
+  <div class="max-w-md mx-auto bg-white rounded-lg shadow-md p-6">
+    <h2 class="text-2xl font-bold mb-6">Register</h2>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-4">
+      <!-- Username Field -->
+      <div>
+        <label class="block text-sm font-medium mb-1">Username</label>
+        <input
+          type="text"
+          formControlName="username"
+          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          [ngClass]="{'border-red-500': registerForm.get('username')?.touched && registerForm.get('username')?.invalid}"
+        >
+        <div *ngIf="registerForm.get('username')?.touched && registerForm.get('username')?.invalid" 
+             class="text-red-500 text-sm mt-1">
+          <div *ngIf="registerForm.get('username')?.errors?.['required']">Username is required</div>
+          <div *ngIf="registerForm.get('username')?.errors?.['minlength']">Username must be at least 3 characters</div>
+        </div>
+      </div>
+
+      <!-- Email Field -->
+      <div>
+        <label class="block text-sm font-medium mb-1">Email</label>
+        <input
+          type="email"
+          formControlName="email"
+          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          [ngClass]="{'border-red-500': registerForm.get('email')?.touched && registerForm.get('email')?.invalid}"
+        >
+        <div *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.invalid" 
+             class="text-red-500 text-sm mt-1">
+          <div *ngIf="registerForm.get('email')?.errors?.['required']">Email is required</div>
+          <div *ngIf="registerForm.get('email')?.errors?.['email']">Please enter a valid email</div>
+        </div>
+      </div>
+
+      <!-- Password Field -->
+      <div>
+        <label class="block text-sm font-medium mb-1">Password</label>
+        <input
+          type="password"
+          formControlName="password"
+          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          [ngClass]="{'border-red-500': registerForm.get('password')?.touched && registerForm.get('password')?.invalid}"
+        >
+        <div *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.invalid" 
+             class="text-red-500 text-sm mt-1">
+          <div *ngIf="registerForm.get('password')?.errors?.['required']">Password is required</div>
+          <div *ngIf="registerForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters</div>
+        </div>
+      </div>
+
+      <!-- Confirm Password Field -->
+      <div>
+        <label class="block text-sm font-medium mb-1">Confirm Password</label>
+        <input
+          type="password"
+          formControlName="confirmPassword"
+          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          [ngClass]="{'border-red-500': registerForm.get('confirmPassword')?.touched && registerForm.errors?.['mismatch']}"
+        >
+        <div *ngIf="registerForm.get('confirmPassword')?.touched && registerForm.errors?.['mismatch']" 
+             class="text-red-500 text-sm mt-1">
+          Passwords do not match
+        </div>
+      </div>
+
+      <!-- Error Message -->
+      <div *ngIf="errorMessage" class="text-red-500 text-sm mt-2">
+        {{ errorMessage }}
+      </div>
+
+      <!-- Success Message -->
+      <div *ngIf="successMessage" class="text-green-500 text-sm mt-2">
+        {{ successMessage }}
+      </div>
+
+      <!-- Submit Button -->
+      <button
+        type="submit"
+        [disabled]="registerForm.invalid || isLoading"
+        class="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50"
+      >
+        <span *ngIf="!isLoading">Register</span>
+        <span *ngIf="isLoading">Registering...</span>
+      </button>
+    </form>
+  </div>
+</div>

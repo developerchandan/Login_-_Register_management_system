@@ -1,0 +1,116 @@
+<!-- <nav class="navbar">
+    <div class="navbar-brand">
+      <a routerLink="/">Your App</a>
+    </div>
+    
+    <div class="navbar-menu">
+      <ng-container *ngIf="isAuthenticated; else loginTemplate">
+        <div class="user-menu">
+          <img [src]="currentUser?.profileImage || 'assets/default-avatar.png'" 
+               [alt]="currentUser?.username"
+               class="avatar">
+          <div class="dropdown">
+            <button class="dropdown-toggle">
+              {{ currentUser?.username }}
+            </button>
+            <div class="dropdown-menu">
+              <a routerLink="/profile">Profile</a>
+              <a routerLink="/settings">Settings</a>
+              <button (click)="logout()">Logout</button>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      
+      <ng-template #loginTemplate>
+        <div class="auth-buttons">
+          <a routerLink="/login" class="btn-login">Login</a>
+          <a routerLink="/register" class="btn-register">Register</a>
+        </div>
+      </ng-template>
+    </div>
+  </nav> -->
+
+  <nav class="bg-white shadow">
+    <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+      <!-- Navbar Brand -->
+      <div class="navbar-brand">
+        <a routerLink="/" class="text-2xl font-bold text-gray-800 hover:text-blue-500">Your App</a>
+      </div>
+  
+      <!-- Navbar Menu -->
+      <div class="navbar-menu flex items-center">
+        <ng-container *ngIf="isAuthenticated; else loginTemplate">
+          <!-- User Menu -->
+          <div class="user-menu flex items-center relative">
+            <!-- <img
+              [src]="currentUser?.profileImage || 'assets/default-avatar.png'"
+              [alt]="currentUser?.username"
+              class="w-10 h-10 rounded-full mr-3"
+            /> -->
+            <div class="relative">
+              <button
+                class="flex items-center focus:outline-none"
+                (click)="toggleDropdown()"
+              >
+                <span class="text-gray-800 font-medium">{{ currentUser?.username }}</span>
+                <svg
+                  class="w-4 h-4 ml-1 text-gray-600"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <!-- Dropdown Icon -->
+                  <path
+                    fill-rule="evenodd"
+                    d="M5.23 7.21a.75.75 0 011.06.02L10 11.294l3.71-4.064a.75.75 0 011.08 1.04l-4.25 4.657a.75.75 0 01-1.08 0L5.21 8.29a.75.75 0 01.02-1.08z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+              </button>
+              <!-- Dropdown Menu -->
+              <div
+                *ngIf="dropdownOpen"
+                class="absolute right-0 mt-2 w-48 bg-white border rounded shadow-md"
+              >
+                <a
+                  routerLink="/profile"
+                  class="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                  (click)="closeDropdown()"
+                  >Profile</a
+                >
+                <a
+                  routerLink="/settings"
+                  class="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                  (click)="closeDropdown()"
+                  >Settings</a
+                >
+                <button
+                  (click)="logout(); closeDropdown()"
+                  class="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
+                >
+                  Logout
+                </button>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+  
+        <!-- Authentication Buttons -->
+        <ng-template #loginTemplate>
+          <div class="auth-buttons flex items-center">
+            <a
+              routerLink="/login"
+              class="text-gray-800 hover:text-blue-500 mx-2"
+              >Login</a
+            >
+            <a
+              routerLink="/register"
+              class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+              >Register</a
+            >
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </nav>
+  
